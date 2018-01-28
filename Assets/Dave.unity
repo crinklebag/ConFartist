@@ -248,41 +248,6 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 444570554}
-    - target: {fileID: 224139071521560012, guid: c7b346398cecdca47b6b671c5e058402,
-        type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224831949034070552, guid: c7b346398cecdca47b6b671c5e058402,
-        type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224831949034070552, guid: c7b346398cecdca47b6b671c5e058402,
-        type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224831949034070552, guid: c7b346398cecdca47b6b671c5e058402,
-        type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: 224139071521560012, guid: c7b346398cecdca47b6b671c5e058402,
-        type: 2}
-      propertyPath: m_LocalScale.x
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224139071521560012, guid: c7b346398cecdca47b6b671c5e058402,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 54
-      objectReference: {fileID: 0}
-    - target: {fileID: 224139071521560012, guid: c7b346398cecdca47b6b671c5e058402,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: -4
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c7b346398cecdca47b6b671c5e058402, type: 2}
   m_IsPrefabParent: 0
@@ -1454,6 +1419,10 @@ Prefab:
       propertyPath: fartUIPivot
       value: 
       objectReference: {fileID: 853915882}
+    - target: {fileID: 4202816257604224, guid: 98d4354e5336c3a46b4f6b4b01073aec, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 98d4354e5336c3a46b4f6b4b01073aec, type: 2}
   m_IsPrefabParent: 0

@@ -205,7 +205,7 @@ public class PlayerController : MonoBehaviour {
             {
                 newFartLevel += 0.001f;
 
-                if (fartUIPivot.transform.eulerAngles.z > 0)
+                if (fartUIPivot.transform.eulerAngles.z > 0 && fartUIPivot.transform.eulerAngles.z < 350)
                 {
                     fartUIPivot.transform.Rotate(Vector3.back);
                 }
@@ -214,7 +214,7 @@ public class PlayerController : MonoBehaviour {
             {
                 newFartLevel += 0.002f;
 
-                if (fartUIPivot.transform.eulerAngles.z > 0)
+                if (fartUIPivot.transform.eulerAngles.z > 0 && fartUIPivot.transform.eulerAngles.z < 350)
                 {
                     fartUIPivot.transform.Rotate(Vector3.back);
                 }
