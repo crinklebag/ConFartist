@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour {
     Joystick playerJoystick;
     Rigidbody2D rb2d;
 
+    Animator[] playerAnimators;
+
     float timeSinceLastFart = 0f;
     bool hasFart = false;
     bool holdingFart = false;
@@ -45,6 +47,7 @@ public class PlayerController : MonoBehaviour {
         rewiredPlayer = ReInput.players.GetPlayer(0);
         playerJoystick = rewiredPlayer.controllers.Joysticks[0];
         rb2d = this.GetComponentInChildren<Rigidbody2D>();
+        playerAnimators = this.GetComponentsInChildren<Animator>();
         dialogueCanvas.gameObject.SetActive(false);
         leftTriggerUI.SetActive(false);
         rightTriggerUI.SetActive(false);
@@ -96,7 +99,21 @@ public class PlayerController : MonoBehaviour {
             moveVector += Vector2.down;
         }
 
-        rb2d.MovePosition(rb2d.position + moveSpeed * moveVector * Time.deltaTime);
+        if (moveVector != Vector2.zero)
+        {
+            foreach (Animator animator in playerAnimators)
+            {
+                animator.SetBool("isWalking", true);
+            }
+            rb2d.MovePosition(rb2d.position + moveSpeed * moveVector * Time.deltaTime);
+        }
+        else
+        {
+            foreach (Animator animator in playerAnimators)
+            {
+                animator.SetBool("isWalking", false);
+            }
+        }
     }
        
     void PlayerActions ()
