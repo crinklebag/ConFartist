@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: a444f7d2877b91146b1bc212f05bbafe
-timeCreated: 1517164096
+timeCreated: 1517164837
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -107,7 +107,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 640
-        width: 128
+        width: 256
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -119,9 +119,9 @@ TextureImporter:
       name: UI_trigButtons_1
       rect:
         serializedVersion: 2
-        x: 128
-        y: 640
-        width: 128
+        x: 0
+        y: 512
+        width: 256
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -134,8 +134,8 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 512
-        width: 128
+        y: 384
+        width: 256
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -147,9 +147,9 @@ TextureImporter:
       name: UI_trigButtons_3
       rect:
         serializedVersion: 2
-        x: 128
-        y: 512
-        width: 128
+        x: 0
+        y: 256
+        width: 256
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -162,8 +162,8 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 384
-        width: 128
+        y: 128
+        width: 256
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -175,93 +175,9 @@ TextureImporter:
       name: UI_trigButtons_5
       rect:
         serializedVersion: 2
-        x: 128
-        y: 384
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: UI_trigButtons_6
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 256
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: UI_trigButtons_7
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 256
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: UI_trigButtons_8
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 128
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: UI_trigButtons_9
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 128
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: UI_trigButtons_10
-      rect:
-        serializedVersion: 2
         x: 0
         y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: UI_trigButtons_11
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 128
+        width: 256
         height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
