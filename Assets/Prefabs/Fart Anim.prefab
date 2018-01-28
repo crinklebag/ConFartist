@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 58638132983971874}
   - component: {fileID: 95598221682705354}
   - component: {fileID: 114336573062735072}
+  - component: {fileID: 82623385431340520}
   m_Layer: 0
   m_Name: Fart Anim
   m_TagString: Untagged
@@ -58,6 +59,86 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2.5
+--- !u!82 &82623385431340520
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1262175923992580}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.741
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 0
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95598221682705354
 Animator:
   serializedVersion: 3
@@ -88,6 +169,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeSpeed: 0.01
   growSpeed: 0
+  quietFarts:
+  - {fileID: 8300000, guid: 9cfe6c1535e03374a941d2792b9e64f8, type: 3}
+  - {fileID: 8300000, guid: 3f5a75c44f8590d4ea4df8447eb71fb2, type: 3}
+  - {fileID: 8300000, guid: 14de42d1899e0e646bb1e47261356f7e, type: 3}
+  - {fileID: 8300000, guid: 14198706a863c1a4d84f3a88e9c459a2, type: 3}
+  - {fileID: 8300000, guid: 695062d101d604c4d9593f81d4c5182e, type: 3}
+  - {fileID: 8300000, guid: 2c829b1904f2bf946a618846d439994f, type: 3}
+  - {fileID: 8300000, guid: 15f967bccfbcce9469f882762f7e31fb, type: 3}
+  loudFarts:
+  - {fileID: 8300000, guid: b4f704a95794f60419dfb1ede9a3ee3d, type: 3}
+  - {fileID: 8300000, guid: 62a6f167db9a82d49aa9ed4d04fe1d07, type: 3}
+  - {fileID: 8300000, guid: e744f874d8c4f1e43b1b40006184ed05, type: 3}
+  - {fileID: 8300000, guid: 29464e8d292549746a8269fc2b597c46, type: 3}
+  - {fileID: 8300000, guid: 2f5f70b3c8331174db049eb6524ce49b, type: 3}
+  - {fileID: 8300000, guid: edaab4b20735b7f49a807862e199ccfc, type: 3}
+  - {fileID: 8300000, guid: 22d24142f816fb541b77c6f5c50a535e, type: 3}
+  - {fileID: 8300000, guid: c65309d62b648924fb01d080ef4fd198, type: 3}
+  fartAudioSource: {fileID: 82623385431340520}
 --- !u!212 &212241442894360252
 SpriteRenderer:
   m_ObjectHideFlags: 1
