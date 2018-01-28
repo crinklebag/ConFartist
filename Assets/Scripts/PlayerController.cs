@@ -21,6 +21,9 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] GameObject rightTriggerUI;
 
 
+    [Header("Dialogue Stuff")]
+    [SerializeField] Canvas dialogueCanvas;
+
     bool level1Released;
     bool level2Released;
     bool level3Released;
@@ -42,6 +45,7 @@ public class PlayerController : MonoBehaviour {
         rewiredPlayer = ReInput.players.GetPlayer(0);
         playerJoystick = rewiredPlayer.controllers.Joysticks[0];
         rb2d = this.GetComponentInChildren<Rigidbody2D>();
+        dialogueCanvas.gameObject.SetActive(false);
         leftTriggerUI.SetActive(false);
         rightTriggerUI.SetActive(false);
     }
@@ -65,11 +69,23 @@ public class PlayerController : MonoBehaviour {
         if (rewiredPlayer.GetAxis("Horizontal") < -0.1f)
         {
             moveVector += Vector2.left;
+
+            if (this.transform.localScale.x < 0)
+            {
+                this.transform.localScale = new Vector3(-this.transform.localScale.x, this.transform.localScale.y, this.transform.localScale.z);
+                dialogueCanvas.transform.localScale = new Vector3(-dialogueCanvas.transform.localScale.x, dialogueCanvas.transform.localScale.y, dialogueCanvas.transform.localScale.z);
+            }
         }
         else if (rewiredPlayer.GetAxis("Horizontal") > 0.1f)
         {
             moveVector += Vector2.right;
-        }
+
+            if (this.transform.localScale.x > 0)
+            {
+                this.transform.localScale = new Vector3(-this.transform.localScale.x, this.transform.localScale.y, this.transform.localScale.z);
+                dialogueCanvas.transform.localScale = new Vector3(-dialogueCanvas.transform.localScale.x, dialogueCanvas.transform.localScale.y, dialogueCanvas.transform.localScale.z);
+            }
+         }
 
         if (rewiredPlayer.GetAxis("Vertical") > 0.1f)
         {
@@ -130,7 +146,7 @@ public class PlayerController : MonoBehaviour {
                     else
                     {
                         Debug.Log("LOUD FART!");
-                        StartCoroutine(Fart(1.5f));
+                        StartCoroutine(Fart(fartLevel));
                     }
                 }
             }
@@ -194,7 +210,12 @@ public class PlayerController : MonoBehaviour {
                 newFartLevel += 0.002f;
             }        
 
-            if(newFartLevel > fartThreshold)
+            if(newFartLevel > 0.80f * fartThreshold)
+            {
+                dialogueCanvas.gameObject.SetActive(true);
+                dialogueCanvas.GetComponentInChildren<Text>().text = "I can't hold it much longer!";
+            }
+            else if(newFartLevel > fartThreshold)
             {
                 StartCoroutine(Fart(1.5f));
             }
@@ -216,14 +237,7 @@ public class PlayerController : MonoBehaviour {
     IEnumerator Fart (float newFartLevel)
     {
 
-        // newFartLevel always either 0 or 1.5f
-
-        // Create fart gameobject, scaling the object depending on the fart level
-        GameObject newFart = Instantiate(fartPrefab, this.transform.position, Quaternion.identity) as GameObject;
-        float fartSize = Mathf.Clamp(newFartLevel, 0.1f, 1f);
-        Debug.Log("newFartLevel: " + newFartLevel);
-        Debug.Log("fartSize: " + fartSize);
-        newFart.transform.localScale = fartSize * Vector3.one;
+        Instantiate(fartPrefab, this.transform.position, Quaternion.identity);
 
         // Create audio
 

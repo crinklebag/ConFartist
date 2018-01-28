@@ -37,4 +37,12 @@ public class Fart : MonoBehaviour {
 
         spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, spriteAlpha);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.transform.name.Contains("NPC"))
+        {
+            collision.GetComponentInChildren<NPCController>().SmellFart();
+        }
+    }
 }
