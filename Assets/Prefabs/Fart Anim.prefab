@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4353945694036960}
   - component: {fileID: 212241442894360252}
   - component: {fileID: 95598221682705354}
+  - component: {fileID: 114336573062735072}
   m_Layer: 0
   m_Name: Fart Anim
   m_TagString: Untagged
@@ -58,6 +59,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114336573062735072
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1262175923992580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e197650400e50784ea7590bb1da146fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeSpeed: 0.01
+  growSpeed: 0.01
 --- !u!212 &212241442894360252
 SpriteRenderer:
   m_ObjectHideFlags: 1
