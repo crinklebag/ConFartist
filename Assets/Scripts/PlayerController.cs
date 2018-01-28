@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour {
     bool hasFart = false;
     bool holdingFart = false;
     float fartLevel = 0f;
+    int score = 0;
 
 	void Start ()
     {
@@ -164,7 +165,7 @@ public class PlayerController : MonoBehaviour {
                     else
                     {
                         Debug.Log("LOUD FART!");
-                        StartCoroutine(Fart(fartLevel));
+                        StartCoroutine(Fart(1.5f));
                     }
                 }
             }
@@ -270,8 +271,14 @@ public class PlayerController : MonoBehaviour {
     {
 
         GameObject newFart = Instantiate(fartPrefab, this.transform.position + new Vector3(0, -1), Quaternion.identity) as GameObject;
-        bool passedVolume = (newFartLevel >= fartThreshold) ? true : false;
-        newFart.GetComponentInChildren<Fart>().SetVolume(true);
+        bool loudFart = (newFartLevel >= fartThreshold) ? true : false;
+        newFart.GetComponentInChildren<Fart>().SetVolume(loudFart);
+
+        // Change score
+        Text scoreText = GameObject.Find("Score TExt Number").GetComponent<Text>();
+        int scoreChange = loudFart ? -100 : 100;
+        score += scoreChange;
+        scoreText.text = score.ToString("000");
 
         hasFart = false;
         holdingFart = false;

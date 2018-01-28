@@ -39,7 +39,7 @@ Transform:
   m_GameObject: {fileID: 1262175923992580}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.64, y: -0.09, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -58,7 +58,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2.5
+  m_Radius: 1.5
 --- !u!82 &82623385431340520
 AudioSource:
   m_ObjectHideFlags: 1
@@ -186,7 +186,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: edaab4b20735b7f49a807862e199ccfc, type: 3}
   - {fileID: 8300000, guid: 22d24142f816fb541b77c6f5c50a535e, type: 3}
   - {fileID: 8300000, guid: c65309d62b648924fb01d080ef4fd198, type: 3}
-  fartAudioSource: {fileID: 82623385431340520}
 --- !u!212 &212241442894360252
 SpriteRenderer:
   m_ObjectHideFlags: 1

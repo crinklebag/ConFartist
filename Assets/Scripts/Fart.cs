@@ -12,13 +12,14 @@ public class Fart : MonoBehaviour {
     [Header ("Fart Sounds")] //lists to contain the sounds for both quiet and loud farts
     [SerializeField] List<AudioClip> quietFarts;
     [SerializeField] List<AudioClip> loudFarts;
-    [SerializeField] AudioSource fartAudioSource;
+    AudioSource fartAudioSource;
     bool fartLoud = false;
 
 
     void Start()
     {
         spriteRenderer = this.GetComponentInChildren<SpriteRenderer>();
+        fartAudioSource = this.GetComponentInChildren<AudioSource>();
         PlayFart(fartLoud);
     }
 
@@ -33,10 +34,12 @@ public class Fart : MonoBehaviour {
         if (loud)
         {
             fartAudioSource.clip = loudFarts[Random.Range(0, loudFarts.Count - 1)];
+            fartAudioSource.volume = 0.5f;
         }
         else
         {
             fartAudioSource.clip = quietFarts[Random.Range(0, quietFarts.Count - 1)];
+            fartAudioSource.volume = 1.0f;
         }
 
         fartAudioSource.Play();
