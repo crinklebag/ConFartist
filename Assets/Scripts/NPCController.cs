@@ -17,7 +17,9 @@ public class NPCController : MonoBehaviour {
 
     [Header("Dialogue")]
     [SerializeField] Canvas dialogueCanvas;
+    [SerializeField] GameObject NPCEmote;
     [SerializeField] string[] fartReactionArray;
+    [SerializeField] string[] playerCalloutArray;
 
     Rigidbody2D rb2d;
 
@@ -45,7 +47,7 @@ public class NPCController : MonoBehaviour {
                 (waypoints[waypointIndex].transform.position.x < this.transform.position.x && this.transform.localScale.x < 0))
             {
                 this.transform.localScale = new Vector3(-this.transform.localScale.x, this.transform.localScale.y, this.transform.localScale.z);
-                dialogueCanvas.transform.localScale = new Vector3(-dialogueCanvas.transform.localScale.x, dialogueCanvas.transform.localScale.y, dialogueCanvas.transform.localScale.z);
+                dialogueCanvas.GetComponentInChildren<Text>().transform.localScale = new Vector3(-dialogueCanvas.GetComponentInChildren<Text>().transform.localScale.x, dialogueCanvas.GetComponentInChildren<Text>().transform.localScale.y, dialogueCanvas.GetComponentInChildren<Text>().transform.localScale.z);
             }
         
             if(distance > distanceRequired)
@@ -59,6 +61,18 @@ public class NPCController : MonoBehaviour {
             }
         }
 	}
+
+    void GetAngry()
+    {
+        NPCEmote.GetComponent<Animator>().SetBool("IsAngry", true);
+        StartCoroutine(CalmDown());
+    }
+
+    IEnumerator CalmDown()
+    {
+        yield return new WaitForSeconds(5);
+        NPCEmote.GetComponent<Animator>().SetBool("IsAngry", false);
+    }
 
     IEnumerator WaitAtWaypoint ()
     {
@@ -74,8 +88,16 @@ public class NPCController : MonoBehaviour {
 
     public void SmellFart ()
     {
+        GetAngry();
         dialogueCanvas.gameObject.SetActive(true);
         dialogueCanvas.GetComponentInChildren<Text>().text = fartReactionArray[Random.Range(0, fartReactionArray.Length)];
+        StartCoroutine(HideDialogueBox());
+    }
+
+    public void SayHi()
+    {
+        dialogueCanvas.gameObject.SetActive(true);
+        dialogueCanvas.GetComponentInChildren<Text>().text = playerCalloutArray[Random.Range(0, playerCalloutArray.Length)];
         StartCoroutine(HideDialogueBox());
     }
 
