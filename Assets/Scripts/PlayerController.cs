@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] float fartRate = 10f;
     [SerializeField] float fartThreshold = 1f;
     [SerializeField] GameObject fartPrefab;
-    [SerializeField] Image fartUI;
+    [SerializeField] GameObject fartUIPivot;
     [SerializeField] GameObject leftTriggerUI;
     [SerializeField] GameObject rightTriggerUI;
 
@@ -182,7 +182,7 @@ public class PlayerController : MonoBehaviour {
             // Create fart
             hasFart = true;
             ChangeFartLevel(0.05f);
-            fartUI.GetComponent<RectTransform>().sizeDelta = 10f * Vector2.one;
+            fartUIPivot.transform.rotation = Quaternion.Euler(0, 0, 180);
             leftTriggerUI.SetActive(true);
             rightTriggerUI.SetActive(true);
             level1Released = false;
@@ -204,10 +204,20 @@ public class PlayerController : MonoBehaviour {
             if (holdingFart)
             {
                 newFartLevel += 0.001f;
+
+                if (fartUIPivot.transform.eulerAngles.z > 0)
+                {
+                    fartUIPivot.transform.Rotate(Vector3.back);
+                }
             }
             else
             {
                 newFartLevel += 0.002f;
+
+                if (fartUIPivot.transform.eulerAngles.z > 0)
+                {
+                    fartUIPivot.transform.Rotate(Vector3.back);
+                }
             }        
 
             if(newFartLevel > 0.80f * fartThreshold)
@@ -230,7 +240,6 @@ public class PlayerController : MonoBehaviour {
     {
 
         fartLevel = newFartLevel;
-        fartUI.GetComponent<RectTransform>().sizeDelta = fartLevel * 150f * Vector2.one;
         playerJoystick.SetVibration(fartLevel, fartLevel);
     }
 
@@ -249,7 +258,7 @@ public class PlayerController : MonoBehaviour {
         yield return new WaitForSeconds(1f);
                 
         ChangeFartLevel(0);
-        fartUI.GetComponent<RectTransform>().sizeDelta = Vector2.zero;
+        fartUIPivot.transform.rotation = Quaternion.Euler(0, 0, 180);
         leftTriggerUI.SetActive(false);
         rightTriggerUI.SetActive(false);
     }
