@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] GameObject fartUIPivot;
     [SerializeField] GameObject leftTriggerUI;
     [SerializeField] GameObject rightTriggerUI;
+    bool initialFartThought = false;
+    bool fartWarningGiven = false;
 
 
     [Header("Dialogue Stuff")]
@@ -26,11 +28,7 @@ public class PlayerController : MonoBehaviour {
 
     bool level1Released;
     bool level2Released;
-    bool level3Released;
-
-    //[Header("Audio Files")]
-
-
+    
     Player rewiredPlayer;
     Joystick playerJoystick;
     Rigidbody2D rb2d;
@@ -76,7 +74,7 @@ public class PlayerController : MonoBehaviour {
             if (this.transform.localScale.x < 0)
             {
                 this.transform.localScale = new Vector3(-this.transform.localScale.x, this.transform.localScale.y, this.transform.localScale.z);
-                dialogueCanvas.transform.localScale = new Vector3(-dialogueCanvas.transform.localScale.x, dialogueCanvas.transform.localScale.y, dialogueCanvas.transform.localScale.z);
+                dialogueCanvas.GetComponentInChildren<Text>().transform.localScale = new Vector3(-dialogueCanvas.GetComponentInChildren<Text>().transform.localScale.x, dialogueCanvas.GetComponentInChildren<Text>().transform.localScale.y, dialogueCanvas.transform.localScale.z);
             }
         }
         else if (rewiredPlayer.GetAxis("Horizontal") > 0.1f)
@@ -86,7 +84,7 @@ public class PlayerController : MonoBehaviour {
             if (this.transform.localScale.x > 0)
             {
                 this.transform.localScale = new Vector3(-this.transform.localScale.x, this.transform.localScale.y, this.transform.localScale.z);
-                dialogueCanvas.transform.localScale = new Vector3(-dialogueCanvas.transform.localScale.x, dialogueCanvas.transform.localScale.y, dialogueCanvas.transform.localScale.z);
+                dialogueCanvas.GetComponentInChildren<Text>().transform.localScale = new Vector3(-dialogueCanvas.GetComponentInChildren<Text>().transform.localScale.x, dialogueCanvas.GetComponentInChildren<Text>().transform.localScale.y, dialogueCanvas.transform.localScale.z);
             }
          }
 
@@ -135,27 +133,30 @@ public class PlayerController : MonoBehaviour {
 
                     level1Released = false;
                     level2Released = false;
-                    level3Released = false;
                 }
             }
             else if(holdingFart && leftTrigger < requiredFartHoldStrength && rightTrigger < requiredFartHoldStrength)
             {
                 // Measure speed of release of fart
                 float level1Threshold = 0.7f;
-                float level2Threshold = 0.4f;
-                float level3Threshold = 0.2f;
+                float level2Threshold = 0.3f;
 
                 if (leftTrigger < level1Threshold && leftTrigger >level2Threshold && 
-                    rightTrigger < level1Threshold && rightTrigger > level2Threshold && !level1Released) { level1Released = true; }
+                    rightTrigger < level1Threshold && rightTrigger > level2Threshold && !level1Released)
+                {
+                    level1Released = true;
+                    playerJoystick.SetVibration(0.5f * fartLevel, 0.5f * fartLevel);
+                }
 
-                if (leftTrigger < level2Threshold && leftTrigger > level3Threshold && 
-                    rightTrigger < level2Threshold && rightTrigger > level3Threshold && !level2Released) { level2Released = true; }
-
-                if (leftTrigger < level3Threshold && rightTrigger < level3Threshold && !level3Released) { level3Released = true; }
+                if (leftTrigger < level2Threshold && rightTrigger < level2Threshold && !level2Released)
+                {
+                    level2Released = true;
+                    playerJoystick.SetVibration(0.5f * fartLevel, 0.5f * fartLevel);
+                }
 
                 if (leftTrigger == 0 && rightTrigger == 0)
                 {
-                    if (level1Released && level2Released && level3Released)
+                    if (level1Released && level2Released)
                     {
                         Debug.Log("quiet fart...");
                         StartCoroutine(Fart(0f));
@@ -204,7 +205,6 @@ public class PlayerController : MonoBehaviour {
             rightTriggerUI.SetActive(true);
             level1Released = false;
             level2Released = false;
-            level3Released = false;
         }
         else if(hasFart == true)
         {
@@ -218,31 +218,37 @@ public class PlayerController : MonoBehaviour {
         {
             float newFartLevel = fartLevel;
             
+            // Update Fart UI
             if (holdingFart)
             {
                 newFartLevel += 0.001f;
-
-                if (fartUIPivot.transform.eulerAngles.z > 0 && fartUIPivot.transform.eulerAngles.z < 350)
-                {
-                    fartUIPivot.transform.Rotate(Vector3.back);
-                }
             }
             else
             {
                 newFartLevel += 0.002f;
+            }
 
-                if (fartUIPivot.transform.eulerAngles.z > 0 && fartUIPivot.transform.eulerAngles.z < 350)
-                {
-                    fartUIPivot.transform.Rotate(Vector3.back);
-                }
-            }        
+            fartUIPivot.transform.eulerAngles = new Vector3(0, 0, 180 - ((newFartLevel / fartThreshold) * 180));
 
-            if(newFartLevel > 0.80f * fartThreshold)
+            // Fart Thoughts
+            if(initialFartThought == false)
             {
+                initialFartThought = true;
+                dialogueCanvas.gameObject.SetActive(true);
+                dialogueCanvas.GetComponentInChildren<Text>().text = "Uh-oh, I have to fart...";
+                StartCoroutine(HideDialogue());
+            }
+            if (newFartLevel > 0.80f * fartThreshold && !fartWarningGiven)
+            {
+                fartWarningGiven = true;
                 dialogueCanvas.gameObject.SetActive(true);
                 dialogueCanvas.GetComponentInChildren<Text>().text = "I can't hold it much longer!";
+                StartCoroutine(HideDialogue());
             }
-            else if(newFartLevel > fartThreshold)
+
+
+            // Fart Results
+            if(newFartLevel > fartThreshold)
             {
                 StartCoroutine(Fart(1.5f));
             }
@@ -263,12 +269,13 @@ public class PlayerController : MonoBehaviour {
     IEnumerator Fart (float newFartLevel)
     {
 
-        Instantiate(fartPrefab, this.transform.position, Quaternion.identity);
-
-        // Create audio
+        GameObject newFart = Instantiate(fartPrefab, this.transform.position + new Vector3(0, -1), Quaternion.identity) as GameObject;
+        bool passedVolume = (newFartLevel >= fartThreshold) ? true : false;
+        newFart.GetComponentInChildren<Fart>().SetVolume(true);
 
         hasFart = false;
         holdingFart = false;
+        fartWarningGiven = false;
 
         ChangeFartLevel(newFartLevel);
 
@@ -278,5 +285,12 @@ public class PlayerController : MonoBehaviour {
         fartUIPivot.transform.rotation = Quaternion.Euler(0, 0, 180);
         leftTriggerUI.SetActive(false);
         rightTriggerUI.SetActive(false);
+    }
+
+    IEnumerator HideDialogue ()
+    {
+        yield return new WaitForSeconds(1);
+
+        dialogueCanvas.gameObject.SetActive(false);
     }
 }
